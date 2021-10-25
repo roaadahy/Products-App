@@ -1,0 +1,93 @@
+<div class="justify-content-center ee">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <label class="wh">Name</label>
+        <input required formControlName="name" type="text" id="name">
+        <div class="text-danger" *ngIf="registerFormControl.name?.errors?.required && registerFormControl.name?.touched">
+            Name is required!
+        </div>
+        <br>
+        <label class="wh">Email Address</label>
+        <input required type="text" [pattern]="emailPattern" id="email" formControlName="email"><br>
+        <div class="text-danger" *ngIf="registerFormControl.email.errors?.pattern && registerFormControl.email?.touched">
+            Invalid Email Address
+            
+        </div>
+        <div class="text-danger" *ngIf="registerFormControl.email?.errors?.required && registerFormControl.email?.touched">
+            Email is required
+        </div>
+        <label class="wh">User Name</label>
+        <input required type="text" id="username" [pattern]="nospacePattern" minlength="5" formControlName="username"><br>
+        <div class="text-danger" *ngIf="registerFormControl.username?.errors?.pattern && registerFormControl.username?.touched">
+            User Name can't have spaces
+        
+        </div>
+        <div class="text-danger" *ngIf="registerFormControl.username?.errors?.required && registerFormControl.username?.touched">
+            User Name is required
+        </div>
+        <label class="wh mr-2">Password</label>
+        <input required minlength="8" type="password" id="password" [pattern]="passwordPattern" formControlName="password"><br>
+            <div class="text-danger" *ngIf="registerFormControl.password?.errors?.required && registerFormControl.password?.touched">
+                Password is required
+            </div>
+            <div class="text-danger" *ngIf="registerFormControl.password?.errors?.minlength && registerFormControl.password?.errors?.pattern">
+                Password minimum Length is 8, and must contain at least one number, one uppercase, one
+                lowercase, and one special character. 
+            </div>
+       
+        <label class="wh">Confirm Password</label>
+        <input required minlength="8" type="password" id="confirmpassword" [pattern]="passwordPattern"
+            name="confirmpassword" formControlName="confirmpassword">
+
+            <div *ngIf="registerFormControl.confirmpassword?.touched && registerFormControl.confirmpassword?.invalid">
+                <small class="text-danger" *ngIf="registerFormControl.confirmpassword?.errors?.required">
+                    Password confirmation is required.
+                </small>
+                <small class="text-danger" *ngIf="registerFormControl.confirmpassword?.errors?.passwordNotMatch">
+                    Password is not matched!
+                </small>
+            </div>
+        <br><br>
+    
+    
+        <button type="button" class="btn btn-success" (click)="addAddress()">Add Address</button>
+        <div class="list-group">
+            <div class="list-group-item" formArrayName="addressArray"
+                *ngFor="let address of registerForm.get('addressArray')['controls']; let i = index">
+                <div [formGroupName]="i">
+                    
+                    <input formControlName="street" class="form-control me-5" placeholder="Street" />
+                    <div *ngIf="registerFormControl.street?.touched && registerFormControl.street?.invalid">
+                        invalid
+                        <small class="text-danger" *ngIf="registerFormControl.street?.errors?.required">
+                            Street is required.
+                        </small>
+                    </div>
+                    <input formControlName="city" class="form-control me-5" placeholder="City" />
+                    <div *ngIf="registerFormControl.city?.touched && registerFormControl.city?.invalid">
+                        invalid
+                        <small class="text-danger" *ngIf="registerFormControl.city?.errors?.required">
+                            City is required.
+                        </small>
+                    </div>
+    
+    
+                    <input formControlName="country" class="form-control me-5" placeholder="Country" />
+                    <div *ngIf="registerFormControl.country?.touched && registerFormControl.country?.invalid">
+                        invalid
+                        <small class="text-danger" *ngIf="registerFormControl.country?.errors?.required">
+                            Country is required.
+                        </small>
+                    </div>
+    
+    
+                    <button class="btn btn-danger" (click)="deleteAddress(i)">Delete</button>
+                </div>
+            </div>
+        </div>
+        <button type="submit" [disabled]="!registerForm.valid" class="btn btn-success">Register</button>
+        <div class="text-black bold mt-3">
+            Already have an account?
+            <a routerLink="/login" class="text-black fw-bold">Login!</a>
+        </div>
+    </form>
+</div>

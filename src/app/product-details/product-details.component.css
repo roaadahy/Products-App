@@ -1,0 +1,14 @@
+
+.card {
+    margin-bottom: 5rem;
+    background-color: rgb(163,196,201);
+    border-radius: 25px;
+    align-items: center;
+}
+
+.cart-img {
+    margin-top: 5rem;
+    width: 60px;
+    height: 60px;
+    
+}

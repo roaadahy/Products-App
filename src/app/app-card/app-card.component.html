@@ -1,0 +1,13 @@
+<div class="card justify-content-center text-center">
+    <img [src]="productInput?.image" class="card-img-top  mt-3 cart-img" [routerLink]="['/product', productInput.id]">
+        <div class="card-body justify-content-center text-center"  [routerLink]="['/product', productInput.id]">
+            <h5 class="card-title">{{ productInput?.title }}</h5>
+            <p class="card-text">{{ productInput?.category }}</p>
+            <p class="card-text">{{ productInput?.price|egyCurrency }}</p>
+        </div>
+    <button class="btn btn-warning w-50 ms-2" (click)="updateCartCounter()" [disabled]="checkBtn[productInput.id - 1]">Add to cart</button>
+    <button class="btn w-50 ms-2 bg-light rounded"(click)="addToWishlist(productInput)" >&#11088;</button>
+
+</div>
+
+

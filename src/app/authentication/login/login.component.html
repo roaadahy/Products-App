@@ -1,0 +1,45 @@
+<div class="justify-content-center ee">
+    <form #loginForm="ngForm" (ngSubmit)="onSubmitTemplateBased(loginForm.value)" class="ml-5 pl-5">
+        <div class="container">
+            <div id="login-row" class="row justify-content-center align-items-center">
+                <div id="login-column" class="col-md-6">
+                    <div id="login-box" class="col-md-12">
+                        <h3 class="text-center wh">Login</h3>
+                        <div class="form-group">
+                            <label for="username" class="wh">Email:</label><br>
+                            <input required type="text" [pattern]="emailPattern" id="email" #email="ngModel" ngModel
+                                name="email" class="form-control">
+                            <div class="text-danger" *ngIf="!email?.valid && email?.touched">
+                                Invalid Email Address
+                                <div *ngIf="email?.errors?.required">
+                                    Email is required
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="wh">Password:</label><br>
+                            <input required minlength="8" type="password" id="password" [pattern]="passwordPattern"
+                                #password="ngModel" ngModel name="password" class="form-control">
+
+                            <div class="text-danger" *ngIf="!password?.valid && password?.touched">
+                                Password minimum Length is 8, and must contain at least one number, one uppercase, one
+                                lowercase, and one special character.
+                                <div class="text-danger" *ngIf="password?.errors?.required">
+                                    Password is required
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="text-center">
+                            <button class="btn btn-primary text-light rounded" type="submit"
+                                [disabled]="!loginForm.valid">Login</button>
+                            <h3>Don't have account? <a [routerLink]="['/register']" class="text-dark">Register!</a></h3>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

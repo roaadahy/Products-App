@@ -1,0 +1,22 @@
+<div>
+  <table class="table table-borderless table-hover w-75 justify-content-center text-center ml-5">
+      <thead>
+          <tr>
+              <th scope="col">My Wishlist</th>
+              <th scope="col"></th>
+              <th scope="col" class="ms-4">You have added {{ itemsInWishlist.length }} Products</th>
+          </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of itemsInWishlist;" class="h-25" (change)="sendItemsToParent(itemsInWishlist)">             
+             <th><img [src]="item?.image " class="w-50 mt-3 "></th>
+              <td>{{ item?.title }}</td>
+              <td>
+                  <button class="btn btn-danger w-50 ms-4" (click)="removeFromWishlist(item) ">Remove</button>
+              </td>
+          </tr>
+      </tbody>
+  </table>
+</div>
+
+
